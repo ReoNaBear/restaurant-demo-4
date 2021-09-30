@@ -1,0 +1,48 @@
+<h1 class="mb-1 restaurant-show-title">新增餐廳資訊</h1>
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto">
+      <form action="/restaurants/new" method="POST">
+        <div class="form-group">
+          <label for="restaurantName">餐廳名稱</label>
+          <input type="text" class="form-control" name='name' id="restaurantName" required=true placeholder="餐廳名稱">
+        </div>
+        <div class="form-group">
+          <label for="restaurantEngName">餐廳英文名稱</label>
+          <input type="text" class="form-control" name='name_en' id="restaurantEngName" required=true
+            placeholder="餐廳英文名稱">
+        </div>
+        <div class="form-group">
+          <label for="rating">評分</label>
+          <input type="number" min="1" max="5" step="0.1" class="form-control" name='rating' id="rating" required=true
+            placeholder="評分">
+        </div>
+        <div class="form-group">
+          <label for="phone">電話</label>
+          <input type="text" class="form-control" name='phone' id="phone" required=true placeholder="電話">
+        </div>
+        <div class="form-group">
+          <label for="category">類別</label>
+          <input type="text" class="form-control" name='category' id="category" required=true placeholder="哪類">
+        </div>
+        <div class="form-group">
+          <label for="google_map">google map</label>
+          <input type="text" class="form-control" name='google_map' id="google_map" required=true
+            placeholder="google_map">
+        </div>
+        <div class="form-group">
+          <label for="location">地址</label>
+          <input type="text" class="form-control" name='location' id="location" required=true placeholder="餐廳地址">
+        </div>
+        <div class="form-group">
+          <label for="image">照片</label>
+          <input type="text" class="form-control" name='image' id="image" required=true placeholder="URL">
+        </div>
+        <div class="form-group">
+          <label for="description">簡介</label>
+          <textarea class="form-control" id="description" rows="3" name="description" required=true></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/">返回</a>
+      </form>
+    </div>

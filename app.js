@@ -68,7 +68,6 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 app.post('/restaurants/:id/edit', (req, res) => {
-  console.log("a")
   const id = req.params.id
   const data = req.body
 
@@ -77,7 +76,28 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-//新增餐廳
+// 新增資料
+app.get('/new', (req, res) => {
+  res.render('new')
+})
+
+app.post('/restaurants/new', (req, res) => {
+  return restaurant.create({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
+  })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+
+})
+
 
 
 //資料庫連線設定

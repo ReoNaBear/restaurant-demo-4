@@ -34,18 +34,19 @@ app.get('/restaurants/:id', (req, res) => {
 })
 
 
-// router 搜尋
+// router 搜尋 這邊參考了同學的寫法
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
-  const storeSearched = restaurantList.results.filter((store) => {
-    return store.name.toLowerCase().includes(keyword.toLowerCase())
+  restaurant.find({
+    $or: [
+      { name: { $regex: keyword, $options: 'i' } },
+      { category: { $regex: keyword, $options: 'i' } },
+      { location: { $regex: keyword, $options: 'i' } }
+    ]
   })
-  console.log(storeSearched)
-  if (storeSearched.length === 0) {
-    res.render('index_noResult')
-  } else {
-    res.render('index', { restaurantList: storeSearched, keyword: keyword })
-  }
+    .lean()
+    .then(restaurants => res.render('index', { restaurants, keyword }))
+    .catch(error => console.log(error))
 })
 
 //資料庫連線設定

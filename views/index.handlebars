@@ -1,0 +1,35 @@
+<!-- search bar -->
+<div class="container mt-5">
+  <div class="row" id="search-bar">
+    <div class="col-12">
+      <form action="/search">
+        <div class="input-group mb-3">
+          <input type="text" name="keyword" class="form-control" placeholder="Enter restaurant name to search..."
+            aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" id="search-button">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div>
+    <!-- restaurant list -->
+    <div class="container">
+      <div class="col-md-12 col-12 mx-auto">
+        <div class="card-columns">
+          {{#each restaurantList}}
+          <a href="/restaurants/{{this.id}}" class="text-secondary">
+            <div class="card mb-2">
+              <img class="card-img-top" src={{this.image}} alt="Card image cap" height="300">
+              <div class="card-body movie-item-body">
+                <h6 class="card-title">{{this.name}}</h6>
+                <span>{{this.category}}</span>
+                <span>{{this.rating}}</span>
+              </div>
+            </div>
+          </a>
+          {{/each}}
+        </div>
+      </div>
+    </div>

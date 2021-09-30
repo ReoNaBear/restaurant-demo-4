@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error)) // 錯誤處理
 })
 
-// router 詳細資料
+//詳細資料
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return restaurant.findById(id)
@@ -34,7 +34,7 @@ app.get('/restaurants/:id', (req, res) => {
 })
 
 
-// router 搜尋 這邊參考了同學的寫法
+//搜尋 這邊參考了同學的寫法
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
   restaurant.find({
@@ -46,6 +46,15 @@ app.get('/search', (req, res) => {
   })
     .lean()
     .then(restaurants => res.render('index', { restaurants, keyword }))
+    .catch(error => console.log(error))
+})
+
+//刪除資料
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 

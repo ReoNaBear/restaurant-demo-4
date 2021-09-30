@@ -42,4 +42,4 @@ const restaurantSchema = new schema({
 })
 
 //透過 module.exports 把這個 schema 輸出
-module.exports = mongoose.model('restaurants', restaurantSchema)
+module.exports = mongoose.model('restaurant', restaurantSchema)

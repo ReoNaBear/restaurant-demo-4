@@ -58,6 +58,28 @@ app.post('/restaurants/:id/delete', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//編輯資料
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  console.log("a")
+  const id = req.params.id
+  const data = req.body
+
+  restaurant.findByIdAndUpdate(id, data)
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+
+//新增餐廳
+
+
 //資料庫連線設定
 require('./config/mongoose')
 

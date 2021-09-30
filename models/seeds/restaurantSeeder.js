@@ -1,9 +1,9 @@
-const Restaurant = require('../restaurantSchema')
+const restaurant = require('../restaurant')
 const db = require('../../config/mongoose')
-const restaurantSeed = require('../../restaurant.json').results
+const restaurantData = require('./restaurantData').results
 
 db.once('open', () => {
-  for (let i = 0; i < restaurantSeed.length; i++) {
+  for (let i = 0; i < restaurantData.length; i++) {
     let { name,
       name_en,
       category,
@@ -12,9 +12,9 @@ db.once('open', () => {
       phone,
       google_map,
       rating,
-      description } = restaurantSeed[i]
+      description } = restaurantData[i]
 
-    Restaurant.create({
+    restaurant.create({
       name,
       name_en,
       category,

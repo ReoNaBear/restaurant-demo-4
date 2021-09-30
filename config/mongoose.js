@@ -1,5 +1,5 @@
 const mongoose = require('mongoose') // 載入 mongoose
-const mongoDB_URL = 'mongodb://localhost/RestaurantList'
+const mongoDB_URL = 'mongodb://localhost/Restaurant'
 
 mongoose.connect(mongoDB_URL, { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
 
@@ -13,3 +13,5 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
 })
+
+module.exports = db

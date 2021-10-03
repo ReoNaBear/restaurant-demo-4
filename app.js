@@ -4,9 +4,13 @@ const exphbs = require('express-handlebars')
 const app = express()
 const restaurant = require('./models/restaurant')
 
-
-
 const bodyParser = require('body-parser')
+
+// 載入 method-override
+const methodOverride = require('method-override')
+// 設定每一筆請求都會透過 methodOverride 進行前置處理
+
+app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // template engine
@@ -50,7 +54,7 @@ app.get('/search', (req, res) => {
 })
 
 //刪除資料
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return restaurant.findById(id)
     .then(restaurant => restaurant.remove())
@@ -67,7 +71,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const data = req.body
 

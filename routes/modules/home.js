@@ -6,14 +6,14 @@ const restaurant = require('../../models/restaurant')
 
 // 設定首頁路由
 router.get('/', (req, res) => {
-  restaurant.find()
+  const userId = req.user._id
+  restaurant.find({ userId: req.user._id })
     .lean()
-    .sort({ name: 'asc' })
+    .sort({ _id: 'asc' })
     .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
     .catch(error => console.error(error)) // 錯誤處理
 })
 
-//搜尋 這邊參考了同學的寫法
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim()
   restaurant.find({

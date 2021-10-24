@@ -1,42 +1,48 @@
 //透過 schema 定義資料的格式
 const mongoose = require('mongoose')
-const schema = mongoose.Schema
-const restaurantSchema = new schema({
-  "name": {
+const Schema = mongoose.Schema
+const restaurantSchema = new Schema({
+  name: {
     type: String,
     required: true
   },
-  "name_en": {
+  name_en: {
     type: String,
     required: true
   },
-  "category": {
+  category: {
     type: String,
     required: true
   },
-  "image": {
+  image: {
     type: String,
     required: true
   },
-  "location": {
+  location: {
     type: String,
     required: true
   },
-  "phone": {
+  phone: {
     type: String,
     required: true
   },
-  "google_map": {
+  google_map: {
     type: String,
     required: true
   },
-  "rating": {
+  rating: {
     type: Number,
     default: 3,
     required: true
   },
-  "description": {
+  description: {
     type: String,
+    required: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
     required: true
   }
 })

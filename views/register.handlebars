@@ -1,34 +1,52 @@
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mt-3">Register</h1>
-      {{> message}}
-      <form action="/users/register" method="POST">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" value="{{ name }}">
+<body class="login">
+  <div class="container">
+    <div class="login-container-wrapper clearfix">
+      <div class="logo">
+        <i class="fas fa-id-card"></i>
+      </div>
+      <div class="welcome"><strong>Welcome,</strong> let's register</div>
+      {{>message}}
+      <form class="form-horizontal login-form" action="/users/register" method="POST">
+        <div class="form-group relative">
+          <input id="login_password" class="form-control input-lg" type="name" placeholder="Name" name="name"
+            value="{{ name }}" required>
+          <i class="fas fa-signature"></i>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
-            value="{{ email }}">
+        <div class="form-group relative">
+          <input id="login_email" class="form-control input-lg" type="email" placeholder="Email" name="email"
+            value="{{ email }}" required>
+          <i class="fa fa-user"></i>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"
-            value="{{ password }}">
+
+        <div class="form-group relative password">
+          <input id="login_password" class="form-control input-lg" type="password" placeholder="Password"
+            name="password" value="{{ password }}" required>
+          <i class="fa fa-lock"></i>
         </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
-            placeholder="Confirm Password" value="{{ confirmPassword }}">
+
+        <div class="form-group relative password">
+          <input id="login_password" class="form-control input-lg" type="password" placeholder="Confirm Password"
+            name="confirmPassword" value="{{ confirmPassword }}" required>
+          <i class="fas fa-check-double"></i>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Register</button>
-        <a href="/auth/facebook" class="btn btn-info btn-block">Facebook Login</a>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-lg btn-block">Register</button>
+        </div>
       </form>
-      <p class="lead mt-4">
-        Have An Account? <a href="/users/login">Login</a>
-      </p>
     </div>
-  </div>
-</div>
+
+    <h4 class="text-center">
+      <a href="/users/login">
+        Have An Account?
+      </a>
+      <br>
+      <div style="margin-top: 20px; color: #f2f2f2;">Or</div>
+      <hr>
+
+      <a href="/auth/facebook">
+        Facebook login
+      </a>
+    </h4>
+
+</body>

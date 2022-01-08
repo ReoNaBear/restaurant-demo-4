@@ -1,23 +1,98 @@
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mt-3">Login</h1>
-      {{> message}}
-      <form action="/users/login" method="POST">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+<body class="login" onload="getData()">
+  <div class="container">
+    <div class="login-container-wrapper clearfix">
+      <div class="logo">
+        <i class="fa fa-sign-in"></i>
+      </div>
+      <div class="welcome"><strong>Welcome,</strong> please login</div>
+
+      <form class="form-horizontal login-form" action="/users/login" method="POST">
+        <div class="form-group relative">
+          <input id="login_email" class="form-control input-lg" type="email" placeholder="Email" name="email" required>
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="form-group relative password">
+          <input id="login_password" class="form-control input-lg" type="password" placeholder="Password"
+            name="password" required>
+          <i class="fa fa-lock"></i>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+          <button type="submit" class="btn btn-success btn-lg btn-block" onclick="setCookie()">Login</button>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
-        <a href="/auth/facebook" class="btn btn-info btn-block">Facebook Login</a>
+        <div style="display: flex;justify-content: space-between;">
+          <label class="checkbox"><input type="checkbox" class="rememberMe" onclick="setCookie()"> Remember</label>
+          <label class="checkbox"> <a class="forget" href="" title="forget">Forgot your password</a> </label>
+        </div>
       </form>
-      <p class="lead mt-4">
-        No Account? <a href="/users/register">Register</a>
-      </p>
     </div>
+
+    <h4 class="text-center">
+      <a href="/users/register">
+        Create New Account?
+      </a>
+      <br>
+      <div style="margin-top: 20px; color: #f2f2f2;">Or</div>
+      <hr>
+
+      <a href="/auth/facebook">
+        Facebook login
+      </a>
+    </h4>
   </div>
-</div>
+
+</body>
+
+<script>
+  function setCookie() {
+    let email = document.querySelector('#login_email').value;
+    let password = document.querySelector('#login_password').value;
+    let rememberMe = document.querySelector('.rememberMe').checked;
+    console.log(rememberMe);
+    if (rememberMe === true) {
+      document.cookie = `email=${email};path=path`;
+      document.cookie = `password=${password};path=path`;
+    } else {
+      delCookie("email");
+      delCookie("password");
+    }
+  }
+
+  function getCookie(cookieName) {
+    let name = cookieName + '=';
+    let decodedCookies = decodeURIComponent(document.cookie);
+    let cookies = decodedCookies.split(';');
+    let data = ''
+    //console.log(cookies);
+    cookies.forEach(cookie => {
+      if (cookieName == cookie.substring(cookieName.length, 0)) {
+        console.log(cookie.substring(cookieName.length + 1, 30))
+        data = cookie.substring(cookieName.length + 1, 30)
+      }
+    });
+    return data;
+  }
+
+  function getData() {
+    let email = getCookie('email');
+    let password = getCookie('password');
+    //如果cookie裡面有email 這樣就將checkbox打勾
+    if (email !== '') {
+      document.querySelector('.rememberMe').checked = true;
+    }
+    //console.log(typeof (password), typeof (email));
+    //console.log(password, email);
+    document.querySelector('#login_password').value = password;
+    document.querySelector('#login_email').value = email;
+  }
+
+  function delCookie(name) {
+    let exp = new Date();
+    //設置時間
+    exp.setTime(exp.getTime() - 1);
+    let cookieValue = getCookie(name);
+    //將同名的cookie加上時間，使其在時間到的時候消失
+    if (cookieValue != null) document.cookie = name + "=" + cookieValue + ";expires=" + exp.toGMTString();
+  }
+
+
+</script>
